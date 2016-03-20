@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "dursi-nextgen-hpc"
+
+  config.vm.network "forwarded_port", guest: 9999, host: 9999, auto_correct: true
+  config.vm.network "forwarded_port", guest: 9998, host: 9998, auto_correct: true
+  config.vm.network "forwarded_port", guest: 8888, host: 8888, auto_correct: true
+  config.vm.network "forwarded_port", guest: 8000, host: 8000, auto_correct: true
+
+  config.vm.network "private_network", ip: "192.168.33.10"
+  config.ssh.forward_agent = true
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "4096"
+    vb.gui = true
+    vb.name =  "Dursi Nextgen HPC Vagrant VM" 
+    vb.cpus = 2
+  end
+
+  config.push.define "atlas" do |push|
+    push.app = "ljdursi/nextgen_hpc"
+  end
+
+  config.vm.provision :shell, path: "install-sw.sh"
+
+end

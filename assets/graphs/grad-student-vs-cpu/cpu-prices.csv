@@ -1,0 +1,104 @@
+year, price_nominal_USD, manufacturer, processor, cores
+1971, 200, Intel, MCS-4, 1
+1972, 120, Intel, 8008, 1
+1978, 360, Intel, 8086, 1
+1982, 360, Intel, 80286, 1
+1983, 150, Zilog, Z80000, 1
+1983, 220, National Semiconuctor, NS32032, 1
+1984, 487, Motorola, 68020, 1
+1985, 299, Intel, 80386, 1
+1987, 697, Motorola, 68030, 1
+1989, 900, Intel, 80486, 1
+1989, 895, Cyprus, 7C601, 1
+1992, 550, Intel, 486DX2, 1
+1992, 699, Intel, Overdrive, 1
+1992, 399, Cyrix, Cx486DRu2, 1
+1993, 360, Motorola, 88110, 1
+1993, 878, Intel, Pentium, 1
+1993, 470, Motorola, PowerPC 601, 1
+1993, 899, TI, SuperSPARC+, 1
+1993, 199, Cyrix, Cx486S2/50, 1
+1993, 393, Motorola, 68040, 1
+1993, 500, IBM, Power PC 601, 1
+1993, 965, DEC, Alpha, 1
+1994, 649, Intel, IntelDX4, 1
+1994, 849, Intel, Pentium+, 1
+1994, 263, Motorola, 68060, 1
+1994, 400, IBM, PowerPC 601, 1
+1994, 396, DEC, Alpha 21066A, 1
+1995, 449, Intel, Pentium Overdrive, 1
+1995, 935, Intel, 120 MHz Pentium, 1
+1995, 649, SPARC, MicroSparc-2, 1
+1995, 935, Intel, 133 MHz Pentium, 1
+1995, 1595, Sun, UltraSparc, 1
+1995, 1225, Intel, Pentium Pro, 1
+1996, 590, Cyrix, 8x86-P166+, 1
+1996, 600, IBM, PowerPC 604, 1
+1996, 600, DEC, Alpha 21164, 1
+1997, 500, Intel, 150 MHz Pentium Overdrive MMX, 1
+1997, 495, DEC, Alpha 21164PC, 1
+1997, 469, AMD, K6, 1
+1997, 775, Intel, Pentium II, 1
+1997, 320, Cyrix, 6x86MX , 1
+1998, 722, Intel, 333MHz Pentium II, 1
+1998, 1400, Sun, 360 MHz UntraSparc IIi, 1
+1998, 283, AMD, K5-2 400MHz, 1
+1999, 614, AMD, 600MHz Athalon, 1
+1999, 826, Intel, 733MHz Xeon, 1
+1999, 849, Intel, 700MHz Athalon, 1
+1999, 776, Intel, 773 MHz Pentium III, 1
+2000, 849, AMD, 850MHz Athalon, 1
+2000, 794, Intel, 933MHz Pentium III, 1
+2000, 612, AMD, 1.2 GHz Athalon, 1
+2000, 800, Intel, Pentium 4, 1
+2001, 350, AMD, 1.33 GHz Athalon, 1
+2001, 352, Intel, 1.7 GHz Pentium 4, 1
+2001, 376, Intel, 1.9 GHz Pentium 4, 1
+2002, 339, AMD, 1.73 GHz Athalon XP 2000+, 1
+2002, 364, Intel, 2.0 GHz Pentium 4 w/ SSE2, 1
+2002, 420, AMD, Athalon XP 2100+, 1
+2002, 562, Intel, 2.4GHz Pentium 4, 1
+2002, 637, Intel, 3.06GHz Pentium 4, 1
+2002, 397, AMD, Athalon XP 2800+, 1
+2003, 588, AMD, Athalon XP 3000+ 2.167GHz, 1
+2003, 417, Intel, 3GHz Pentium 4 , 1
+2003, 464, AMD, Athalon XP 3200+, 1
+2003, 637, Intel, 3.2 GHz Pentium 4, 1
+2003, 417, AMD, Athalon 64 3200+, 1
+2004, 733, AMD, 2.4 GHz Athalon 64 FX-53, 1
+2004, 851, AMD, Opteron 250, 1
+2004, 720, AMD, 2.4 GHz Athalon 64 3800+, 1
+2004, 417, Intel, Pentium 4 550, 1
+2004, 690, Intel, 3.4 GHz Xeon , 1
+2004, 729, AMD, 2.4 GHz Athalon 64 4000+, 1
+2004, 637, Intel, 3.8 GHz Pentium 4, 1
+2005, 401, Intel, Pentium 4 650, 1
+2005, 316, Intel, Pentium D 830, 2
+2005, 803, AMD, Athalon 64 x2 Dual-Core 4600+, 2
+2005, 354, AMD, Athalon 64 x2 Dual-Core 4800+, 2
+2005, 273, Intel, Pentium 4 651, 1
+2005, 423, Intel, Pentium D 940, 2
+2006, 999, AMD, Athalon 64 FX-60, 1
+2006, 999, Intel, Pentium Extreme 965, 2
+2006, 530, Intel, Pentium D 960, 2
+2006, 530, AMD, Athalon 64 X2 4800+ energy-efficient ,2
+2006, 696, AMD, 2.6 GHz Athalon 64 X2 5000+, 2
+2006, 316, Intel, Core 2 Duo E6600, 2
+2006, 827, AMD, Athalon 64 X2 5200+, 2
+2007, 851, Intel, Core 2 Quad Q6600, 4
+2007, 464, AMD, Athalon 64 X2 6000+, 2
+2007, 530, Intel, Core 2 Quad Q6700, 4
+2008, 316, Intel, Core 2 Quad Q9450, 4
+2008, 562, Intel, Core i7-940, 4
+2012, 194, AMD, FX-8350, 8
+2012, 999, Intel, Core i7-3970X, 6
+2013, 303, Intel, Core i7-4770, 4
+2013, 375, AMD, FX-9370, 8
+2013, 583, Intel, Core i7-4930, 4
+2015, 245, Intel, Xeon E5-2408L, 4
+2015, 472, Intel, Xeon E5-2418L v3, 6
+2015, 811, Intel, Xeon E5-2428L v3, 8
+2015, 1555, Intel, Xeon E5-2438L v3, 10
+2015, 608, Intel, Xeon E5-1428L v3, 8
+2016, 1222, Intel, Xeon D-1571, 16
+2016, 844, Intel, Xeon D-1557, 12

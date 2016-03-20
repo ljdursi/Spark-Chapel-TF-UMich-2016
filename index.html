@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Next Generation HPC?</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Next Generation HPC?">
+  <meta name="author" content="Jonathan Dursi">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/oicr-trans.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Next Generation HPC?</h1>
+    <h2>Spark, Chapel, and TensorFlow</h2>
+    <p>Jonathan Dursi<br/>Scientific Associate/Software Engineer, Informatics and Biocomputing, OICR</p>
+  </hgroup>
+    <a href="https://github.com/ljdursi/Spark-Chapel-TF-UMich-2016/zipball/gh-pages" class="example">
+     Download
+    </a>
+  <article></article>  
+  <footer class = 'license'>
+    <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/'>
+    <img width = '80px' src = 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png'>
+    </a>
+  </footer>
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <style type="text/css">
+.title-slide {
+  background-color: #EDEDED; 
+}
+article p {
+  text-align:left;
+}
+p {
+  text-align:left;
+}
+ul li {
+  text-align:left;
+}
+img {     
+  max-width: 90%;
+  max-height: 90%;
+  vertical-align: middle;
+}
+</style>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+
+<script type="text/javascript">
+$(function() {     
+  $("p:has(img)").addClass('centered'); 
+  });
+</script>
+ 
+
+<h2>Exciting Time to be Doing Large-Scale Scientific Computing!</h2>
+
+<p>Large scale scientific computing, 1995-2005 (ish):</p>
+
+<ul>
+<li>~20 years of stability</li>
+<li>Bunch of x86, MPI, ethernet or infiniband</li>
+<li>No one outside of academia was much doing big number crunching</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>New Communities Make things Exciting</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>Internet-scale companies (Yahoo!, Google)</li>
+<li>Very large-scale image processing</li>
+<li>Machine learning:
+
+<ul>
+<li>Sparse linear algebra</li>
+<li>k-d trees</li>
+<li>Calculations on unstructured meshes (graphs)</li>
+<li>Numerical optimization</li>
+</ul></li>
+<li>Building new frameworks</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/new-communities.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>New Hardware Makes things Exciting!</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>Now:
+
+<ul>
+<li>Large numbers of cores per socket</li>
+<li>GPUs/Phis</li>
+</ul></li>
+<li>Next few years:
+
+<ul>
+<li>FPGA (Intel: Broadwell + Arria 10, shipping 2017)</li>
+<li>Non-volatile Memory (external memory/out-of-core algorithms)</li>
+</ul></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/fpga.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>New Hardware Makes things Exciting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/cray-stream-triad-1.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>New Hardware Makes things Exciting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/cray-stream-triad-2.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>New Hardware Makes things Exciting?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/cray-stream-triad-3.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Programming Time is More Precious Than Compute</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/graphs/grad-student-vs-cpu/gradstudents-per-cpu.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Programming Time is More Precious Than Compute</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>And this only becomes more pronounced with other trends which make scientific programming harder:</p>
+
+<ul>
+<li>New variations of hardware</li>
+<li>New science demands: cutting edge models are more complex.  An Astro example:
+
+<ul>
+<li>80s - gravity only N-body, galaxy-scale</li>
+<li>90s - N-body, cosmological</li>
+<li>00s - Hydrodynamics, cosmological</li>
+<li>10s - Hydrodynamics + rad transport + cosmological</li>
+</ul></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/graphs/grad-student-vs-cpu/gradstudents-per-cpu.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Things are currently harder than they have to be</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><em>Computational</em> scientists have learned a lot about <em>computer</em> science in the last 20+ years.</p>
+
+<ul>
+<li>Encapsulation</li>
+<li>Higher level programming languages (eg, python-as-glue)</li>
+<li>Code collaboration, sharing (github, etc)</li>
+<li>Division of labour - more distinction between people who work on libraries and people who build software that implements a scientific model</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/mpi-ex.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>We&#39;re programming at the transport layer...</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>But our frameworks are letting us down.</p>
+
+<p>MPI, which has served us very well for &gt;25 years, is 90+% low level.  </p>
+
+<ul>
+<li>&quot;Send 100 floats to task 7&quot;</li>
+<li>Close to a network-agnostic sockets API (So maybe network level)
+
+<ul>
+<li>But a sockets API where everyone&#39;s browser crashes if a web server goes down.</li>
+</ul></li>
+<li>Assumptions made to make it easy for scientists to directly program in make it very difficult to build general frameworks upon (new MPI-3 one-sided stuff being an honourable exception)</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/osi-1.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>When we want to think about models, systems</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Programming at that level is worse than just hard.</p>
+
+<ul>
+<li>Makes the code very brittle.</li>
+<li>Changing how the data is distributed means completely rewriting every line of code that assumes the current distribution, communications pattern.</li>
+<li>&ldquo;I have an idea! I <em>think</em> it will speed up the code 25%!  But it means rewriting 50,000 lines of code.&rdquo;
+
+<ul>
+<li>#ExperimentsThatWillNeverHappen</li>
+</ul></li>
+<li>Makes it hard to take advantage of the opportunities new technologies present.</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/osi-2.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>We know things can be better</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='New Communities Make things Exciting'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='New Hardware Makes things Exciting!'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='New Hardware Makes things Exciting?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='New Hardware Makes things Exciting?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='New Hardware Makes things Exciting?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Programming Time is More Precious Than Compute'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Programming Time is More Precious Than Compute'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Things are currently harder than they have to be'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='We&#39;re programming at the transport layer...'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='When we want to think about models, systems'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='We know things can be better'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='NA'>
+         13
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
