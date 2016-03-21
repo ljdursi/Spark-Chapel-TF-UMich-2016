@@ -82,7 +82,7 @@ $(function() {
 </script>
  
 
-<h2>Exciting Time to be Doing Large-Scale Scientific Computing!</h2>
+<h2>Exciting Time to be Doing Large-Scale Scientific Computing</h2>
 
 <p>Large scale scientific computing, 1995-2005 (ish):</p>
 
@@ -98,7 +98,7 @@ $(function() {
 
 <slide class="" id="slide-2" style="background:;">
   <hgroup>
-    <h2>New Communities Make things Exciting</h2>
+    <h2>New Communities Make things Exciting!</h2>
   </hgroup>
   <article data-timings="">
     
@@ -242,7 +242,7 @@ $(function() {
 
 <ul>
 <li>Encapsulation</li>
-<li>Higher level programming languages (eg, python-as-glue)</li>
+<li>Higher level programming languages (<em>e.g.</em>, python-as-glue)</li>
 <li>Code collaboration, sharing (github, etc)</li>
 <li>Division of labour - more distinction between people who work on libraries and people who build software that implements a scientific model</li>
 </ul>
@@ -296,7 +296,7 @@ $(function() {
   <p>Programming at that level is worse than just hard.</p>
 
 <ul>
-<li>Makes the code very brittle.</li>
+<li>Makes the code very resistant to change.</li>
 <li>Changing how the data is distributed means completely rewriting every line of code that assumes the current distribution, communications pattern.</li>
 <li>&ldquo;I have an idea! I <em>think</em> it will speed up the code 25%!  But it means rewriting 50,000 lines of code.&rdquo;
 
@@ -317,16 +317,244 @@ $(function() {
 
 <slide class="" id="slide-12" style="background:;">
   <hgroup>
-    <h2>We know things can be better</h2>
+    <h2>We know things can be better, from...</h2>
   </hgroup>
   <article data-timings="">
-    <p>be</p>
+    <p>There have been many projects from within scientific computing that have tried to provide a higher-level approach - most have not been wildly successful.</p>
+
+<ul>
+<li>Many were focussed to specifically on one kind of problem (HPF)</li>
+<li>Or solved one research group&#39;s problems but people working in other areas weren&#39;t enthusiastic (Charm++)</li>
+</ul>
+
+<p>But new communties are reawakining these efforts with the sucesses they&#39;re having with their approaches.</p>
+
+<p>And we know we can have <em>both</em> high performance and higher-level primitives from a parallel library I use pretty routinely.  </p>
+
+<p>It&#39;s called MPI.</p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>We know things can be better, from MPI</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><strong>Collective</strong> operations - scatter, gather, broadcast, or interleave data from all participating tasks.</p>
+
+<p>Are implemented with:</p>
+
+<ul>
+<li>Linear sends</li>
+<li>Binary trees</li>
+<li>Split rings</li>
+<li>Topology aware
+...</li>
+</ul>
+
+<p>Make decisions about which to use size of communicator, size of message, etc without researcher intervention.</p>
+
+<p>Can influence choice with implementation-dependant runtime options.</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/collectives.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>We know things can be better, from MPI</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><strong>Parallel I/O</strong> operations - interacting with a filesystem</p>
+
+<p>Many high-level optimizations possible </p>
+
+<ul>
+<li>Data sieving</li>
+<li>Two-phase I/O</li>
+<li>File-system dependant optimizations</li>
+</ul>
+
+<p>Algorithmic decisions made at run time, with researcher only able to issue &#39;hints&#39; as to behaviour</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/mpi-io.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>We know things can be better, from MPI</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>These work <em>extremely</em> well.</p>
+
+<p>Before available, how many researchers had to (poorly) re-implement these things themselves?</p>
+
+<p>Nobody suggests now that researchers re-write them at low level &ldquo;for best performance&rdquo;.</p>
+
+<p>Researchers constantly re-implementing mesh data exchanges, distributed-memory tree algorithms, etc. make no more sense.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>The Plan</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>For the rest of our time together, will introduce you to three technologies - one from within HPC, two from without - that I think have promise:</p>
+
+<ul>
+<li>Chapel - an HPC PGAS language from Cray</li>
+<li>Spark - a data-processing framework, originally out of UC Berkeley</li>
+<li>TensorFlow - data processing for &quot;deep learning&quot;, from Google</li>
+</ul>
+
+<p>All of these can be used for some HPC tasks now with the promise of much wider HPC relevance in the coming couple of years.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Chapel: <a href="http://chapel.cray.com">http://chapel.cray.com</a></h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>An Very Quick Intro to Chapel</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Chapel was one of several languages funded through DARPA HPCS (High Productivity Computing Systems) 
+project. Successor of <a href="http://research.cs.washington.edu/zpl/home/">ZPL</a>.</p>
+
+<p>A PGAS language with global view; that is, code can be written as if there was only one thread (think OpenMP)</p>
+
+<pre><code>config const m = 1000, alpha = 3.0;
+
+const ProblemSpace = {1..m} dmapped Block({1..m});
+
+var A, B, C: [ProblemSpace] real;
+
+B = 2.0;
+C = 3.0;
+
+A = B + C;
+</code></pre>
+
+<p><code>$ ./a.out --numLocales=8 --m=50000</code></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Domain Maps</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Chapel, and ZPL before it:</p>
+
+<ul>
+<li>Separate the expression of the concurrency from that of the locality.</li>
+<li>Encapsulate <em>layout</em> of data in a &quot;Domain Map&quot;</li>
+<li>Express the currency directly in the code - programmer can take control</li>
+<li>Allows &quot;what ifs&quot;, different layouts of different variables.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Domain Maps</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>What distinguishes Chapel from HPL (say) is that it has these maps for other structures - and user can supply domain maps:</p>
+
+<p><img src="assets/img/domain-maps.png" alt=""></p>
+
+<p><a href="http://chapel.cray.com/tutorials/SC09/Part4_CHAPEL.pdf">http://chapel.cray.com/tutorials/SC09/Part4_CHAPEL.pdf</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Spark: <a href="http://spark.apache.com">http://spark.apache.com</a></h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>An intro to Spark</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a></h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>An intro to TensorFlow</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Conclusions</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
   <article data-timings="">
     
   </article>
@@ -345,7 +573,7 @@ $(function() {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='New Communities Make things Exciting'>
+        data-slide=2 title='New Communities Make things Exciting!'>
          2
       </a>
     </li>
@@ -405,14 +633,92 @@ $(function() {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='We know things can be better'>
+        data-slide=12 title='We know things can be better, from...'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='NA'>
+        data-slide=13 title='We know things can be better, from MPI'>
          13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='We know things can be better, from MPI'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='We know things can be better, from MPI'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='The Plan'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Chapel: <a href="http://chapel.cray.com">http://chapel.cray.com</a>'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='An Very Quick Intro to Chapel'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Domain Maps'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Domain Maps'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Spark: <a href="http://spark.apache.com">http://spark.apache.com</a>'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='An intro to Spark'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='An intro to TensorFlow'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Conclusions'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='NA'>
+         26
       </a>
     </li>
   </ul>
