@@ -512,13 +512,136 @@ Like MPI (BSP) on unstructured graphs!
 *** =right
 ![](assets/img/graphx.png)
 
+--- &twocol
+
+## Spark Graphs - GraphX
+
+*** =left
+
+Maddeningly, graph algorithms are not yet fully available from Python - in particular, Pregel.
+
+Can try to mock communications up along edges of an unstructured mesh, but unbelievably slow.
+
+Still, gives a hint what's possible.
+
+*** =right
+![](assets/img/unstructured-mesh.png)
+
+Notebook: Spark 3 - Unstructured Mesh
+
+--- 
+
+## Spark's Capabilities
+
+For data analysis, Spark is already there - like parallel R without the headaches and with a growing level of packages.
+
+Lots of typical statstics + machine learning.
+
+For traditional high performance computing, seems a little funny so far: Scalapack-style distributed block matricies are there, with things like PCA, but not linear solves!  
+
+Graph support will enable a lot of really interesting applications (Spark 2.x - this year?)
+
+Very easy to set up a local Spark install on your laptop.
+
+--- 
+
+## Spark Cons
+
+JVM Based (Scala) means C/Python interoperability always fraught.
+
+Not much support for high-performance interconnects (although that's coming from third parties - [HiBD group at OSU](http://hibd.cse.ohio-state.edu))
+
+Very little explicit support for multicore yet, which leaves some performance on the ground.
+
 --- .segue .dark
 
 ## Tensorflow: http://tensorflow.org
 
+--- &twocol
+
+## A Quick Intro to TensorFlow
+
+*** =left
+
+TensorFlow is an open-source dataflow for numerical computation with dataflow graphs, where the data is always in the form of tensors (n-d arrays).
+
+From Google, who uses it for machine learning.
+
+Heavy number crunching, can use GPUs or CPUs, and will distribute tasks of a complex workflow across resources.
+
+(Current version only has initial support for distributed; taking longer to de-google the distributed part than anticipated)
+
+*** =right
+![](assets/img/tensors_flowing.gif)
+
+http://www.tensorflow.org
+
+--- &twocol
+
+## TensorFlow Graphs
+
+*** =left
+
+As an example of how a computation is set up, here is a linear regression example.
+
+Linear regression is already built in, and doesn't need to be iterative, but this example is quite general and shows how it works.
+
+Variables are explicitly introduced to the TensorFlow runtime, and a series of transformations on the
+variables are defined.
+
+When the entire flowgraph is set up, the system can be run.
+
+The integration of tensorflow tensors and numpy arrays is very nice.
+
+
+*** =right
+![](assets/img/tf_regression_code.png)
+![](assets/img/tf_regression_fit.png)
+
+--- &twocol
+
+## TensorFlow Mandelbrot
+
+*** =left
+
+All sorts of computations on regular arrays can be performed.
+
+Some computations can be split across GPUs, or (eventually) even nodes.
+
+All are multi-threaded.
+
+*** =right
+![](assets/img/tf_mandelbrot.png)
+
+--- &twocol
+
+## TensorFlow Wave Equation
+
+*** =left
+
+All sorts of computations on regular arrays can be performed.
+
+Some computations can be split across GPUs, or (eventually) even nodes.
+
+All are multi-threaded.
+
+*** =right
+![](assets/img/tf_wave_eqn.png)
+
+
 ---
 
-## An intro to TensorFlow
+## TensorFlow: Caveats
+
+* Tensors only means limited support for, eg, unstructured meshes, hash tables (bioinformatics)
+* Distribution of work remains limited and manual (but is expected to improve - Google uses this)
+
+## TensorFlow: Pros
+
+* C++ - interfacing is much simpler than 
+* Fast
+* GPU, CPU support, not unreasonble to expect Phi support shortly
+* Great for data processing, image processing, or computations on n-d arrays
 
 --- .segue .dark
 
@@ -526,4 +649,12 @@ Like MPI (BSP) on unstructured graphs!
 
 ---
 
-foo bar baz
+## Building an Execution Plan for a Better Tomorrow
+
+All of the approaches we've seen implicitly or explicitly constructed dataflow graphs to describe where data needs to move.
+
+Then can build optimization on top of that to improve data flow, movement; optimization often leaves room for improvement.
+
+These approaches are extremely promising, and already completely useable at scale for some sorts of tasks.
+
+None will replace MPI yet, but any have the opportunity to make some work much more productive, and reduce time-to-science

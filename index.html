@@ -813,7 +813,65 @@ HPC applications, too, like simulation:</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-36" style="background:;">
+<slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>Spark Graphs - GraphX</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Maddeningly, graph algorithms are not yet fully available from Python - in particular, Pregel.</p>
+
+<p>Can try to mock communications up along edges of an unstructured mesh, but unbelievably slow.</p>
+
+<p>Still, gives a hint what&#39;s possible.</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/unstructured-mesh.png" alt=""></p>
+
+<p>Notebook: Spark 3 - Unstructured Mesh</p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
+  <hgroup>
+    <h2>Spark&#39;s Capabilities</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>For data analysis, Spark is already there - like parallel R without the headaches and with a growing level of packages.</p>
+
+<p>Lots of typical statstics + machine learning.</p>
+
+<p>For traditional high performance computing, seems a little funny so far: Scalapack-style distributed block matricies are there, with things like PCA, but not linear solves!  </p>
+
+<p>Graph support will enable a lot of really interesting applications (Spark 2.x - this year?)</p>
+
+<p>Very easy to set up a local Spark install on your laptop.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-38" style="background:;">
+  <hgroup>
+    <h2>Spark Cons</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>JVM Based (Scala) means C/Python interoperability always fraught.</p>
+
+<p>Not much support for high-performance interconnects (although that&#39;s coming from third parties - <a href="http://hibd.cse.ohio-state.edu">HiBD group at OSU</a>)</p>
+
+<p>Very little explicit support for multicore yet, which leaves some performance on the ground.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-39" style="background:;">
   <hgroup>
     <h2>Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a></h2>
   </hgroup>
@@ -823,17 +881,128 @@ HPC applications, too, like simulation:</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-37" style="background:;">
+<slide class="" id="slide-40" style="background:;">
   <hgroup>
-    <h2>An intro to TensorFlow</h2>
+    <h2>A Quick Intro to TensorFlow</h2>
   </hgroup>
   <article data-timings="">
     
+<div style='float:left;width:48%;' class='centered'>
+  <p>TensorFlow is an open-source dataflow for numerical computation with dataflow graphs, where the data is always in the form of tensors (n-d arrays).</p>
+
+<p>From Google, who uses it for machine learning.</p>
+
+<p>Heavy number crunching, can use GPUs or CPUs, and will distribute tasks of a complex workflow across resources.</p>
+
+<p>(Current version only has initial support for distributed; taking longer to de-google the distributed part than anticipated)</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/tensors_flowing.gif" alt=""></p>
+
+<p><a href="http://www.tensorflow.org">http://www.tensorflow.org</a></p>
+
+</div>
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-38" style="background:;">
+<slide class="" id="slide-41" style="background:;">
+  <hgroup>
+    <h2>TensorFlow Graphs</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>As an example of how a computation is set up, here is a linear regression example.</p>
+
+<p>Linear regression is already built in, and doesn&#39;t need to be iterative, but this example is quite general and shows how it works.</p>
+
+<p>Variables are explicitly introduced to the TensorFlow runtime, and a series of transformations on the
+variables are defined.</p>
+
+<p>When the entire flowgraph is set up, the system can be run.</p>
+
+<p>The integration of tensorflow tensors and numpy arrays is very nice.</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/tf_regression_code.png" alt="">
+<img src="assets/img/tf_regression_fit.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-42" style="background:;">
+  <hgroup>
+    <h2>TensorFlow Mandelbrot</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>All sorts of computations on regular arrays can be performed.</p>
+
+<p>Some computations can be split across GPUs, or (eventually) even nodes.</p>
+
+<p>All are multi-threaded.</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/tf_mandelbrot.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-43" style="background:;">
+  <hgroup>
+    <h2>TensorFlow Wave Equation</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>All sorts of computations on regular arrays can be performed.</p>
+
+<p>Some computations can be split across GPUs, or (eventually) even nodes.</p>
+
+<p>All are multi-threaded.</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/tf_wave_eqn.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-44" style="background:;">
+  <hgroup>
+    <h2>TensorFlow: Caveats</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Tensors only means limited support for, eg, unstructured meshes, hash tables (bioinformatics)</li>
+<li>Distribution of work remains limited and manual (but is expected to improve - Google uses this)</li>
+</ul>
+
+<h2>TensorFlow: Pros</h2>
+
+<ul>
+<li>C++ - interfacing is much simpler than </li>
+<li>Fast</li>
+<li>GPU, CPU support, not unreasonble to expect Phi support shortly</li>
+<li>Great for data processing, image processing, or computations on n-d arrays</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-45" style="background:;">
   <hgroup>
     <h2>Conclusions</h2>
   </hgroup>
@@ -843,9 +1012,18 @@ HPC applications, too, like simulation:</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-39" style="background:;">
+<slide class="" id="slide-46" style="background:;">
+  <hgroup>
+    <h2>Building an Execution Plan for a Better Tomorrow</h2>
+  </hgroup>
   <article data-timings="">
-    <p>foo bar baz</p>
+    <p>All of the approaches we&#39;ve seen implicitly or explicitly constructed dataflow graphs to describe where data needs to move.</p>
+
+<p>Then can build optimization on top of that to improve data flow, movement; optimization often leaves room for improvement.</p>
+
+<p>These approaches are extremely promising, and already completely useable at scale for some sorts of tasks.</p>
+
+<p>None will replace MPI yet, but any have the opportunity to make some work much more productive, and reduce time-to-science</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1067,26 +1245,68 @@ HPC applications, too, like simulation:</p>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
+        data-slide=36 title='Spark Graphs - GraphX'>
          36
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title='An intro to TensorFlow'>
+        data-slide=37 title='Spark&#39;s Capabilities'>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='Conclusions'>
+        data-slide=38 title='Spark Cons'>
          38
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=39 title='NA'>
+        data-slide=39 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
          39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='A Quick Intro to TensorFlow'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='TensorFlow Graphs'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='TensorFlow Mandelbrot'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='TensorFlow Wave Equation'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='TensorFlow: Caveats'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='Conclusions'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='Building an Execution Plan for a Better Tomorrow'>
+         46
       </a>
     </li>
   </ul>
