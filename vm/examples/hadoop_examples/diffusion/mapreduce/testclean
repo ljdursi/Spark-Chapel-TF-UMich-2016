@@ -1,9 +1,0 @@
-#!/bin/bash
-
-prefix="timestep"
-nsteps=20
-for iter in $( seq 1 $((nsteps+1)) )
-do
-    rm -r -f ${prefix}-${iter}
-done
-rm -f data
