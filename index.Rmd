@@ -374,7 +374,7 @@ Lots of things do stencils on fixed rectangular grids well; maybe more impressiv
 
 ---
 
-## An intro to Spark
+## A Very Quick Intro to Spark
 
 Spark is a "Big Data" technology originally out of the 
 [AMPLab at UC Berkeley](https://amplab.cs.berkeley.edu) that is rapidly becoming extremely popular.
@@ -383,7 +383,7 @@ Spark is a "Big Data" technology originally out of the
 
 ---
 
-## An intro to Spark
+## A Very Quick Intro to Spark
 
 Hadoop came out in ~2006 with MapReduce as a computational engine, which wasn't that useful for scientific computation.
 
@@ -395,7 +395,7 @@ and processing packages that grew up around it.
 
 --- &twocol
 
-## An intro to Spark
+## A Very Quick Intro to Spark
 
 *** =left
 Spark is in some ways "post-Hadoop"; it can happily interact with the Hadoop stack but doesn't require it.
@@ -410,6 +410,107 @@ Built around concept of resilient distributed datasets
 *** =right
 ![](assets/img/spark-rdd.png)
 
+--- 
+
+## More than just analytics
+
+Don't need to justify Spark for those analyzing large emounts of data:
+* Already widely successful for large-scale data processing
+
+Want to show how close it is to being ready to use for more traditional
+HPC applications, too, like simulation:
+* Simulation is "data intensive", too.
+
+
+--- &twocol
+
+## Spark RDDs
+
+*** =left
+
+Spark RDDs prove to be a very powerful abstraction.
+
+Key-Value RDDs are a special case - a pair of values, first is key, second is value associated with.
+
+Can easily use join, etc to bring all values associated with a key together:
+  - Like all terms that are contribute to a particular point
+  
+Linda tuple spaces, which underly Gaussian.
+
+Notebook: Spark 1 - diffusion
+
+*** =right
+![](assets/img/spark-rdds-diffusion.png)
+
+--- &twocol
+
+## Spark execution graphs
+
+*** =left
+
+Operations on Spark RDDs can be:
+* Transformations, like map, filter, join...
+* Actions like collect, foreach, ..
+
+You boild a Spark computation by chaining together operations; but no data starts moving until part of the computation is materialized with an action.
+
+Allows optimizations over the entire computation graph.
+
+*** =right
+![](assets/img/spark-rdd.png)
+
+--- 
+
+## Spark execution graphs
+
+So for instance here, nothing starts happening in earnest until the `plot_data()`
+
+```
+    # Main loop: For each iteration,
+    #  - calculate terms in the next step
+    #  - and sum
+    for step in range(nsteps):
+        data = data.flatMap(stencil) \
+                    .reduceByKey(lambda x, y:x+y)
+            
+    # Plot final results in black
+    plot_data(data, usecolor='black')
+```
+
+--- &twocol
+
+## Spark Dataframes
+
+*** =left
+![](assets/img/spark-dataframes.png)
+
+*** =right
+
+But RDDs are also building blocks.
+
+Spark Data Frames are lists of columns, like pandas or R data frames.
+
+Can use SQL-like queries to perform calculations.  But this allows bringing the entire mature machinery of SQL query optimizers to bear, allowing further automated optimization of data movement, and computation.
+
+
+Notebook: Spark 2 - data frames
+
+--- &twocol
+
+## Spark Graphs - GraphX
+
+*** =left
+
+Using RDDs, a graph library has also been implemented: GraphX.
+
+Many interesting features, but for us: [Pregel](http://blog.acolyer.org/2015/05/26/pregel-a-system-for-large-scale-graph-processing/)-like algorithms on graphs.
+
+Nodes passes messages to their neighbours along edges.
+
+Like MPI (BSP) on unstructured graphs!
+
+*** =right
+![](assets/img/graphx.png)
 
 --- .segue .dark
 

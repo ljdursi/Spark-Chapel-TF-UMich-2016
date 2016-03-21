@@ -606,7 +606,7 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
 
 <slide class="" id="slide-27" style="background:;">
   <hgroup>
-    <h2>An intro to Spark</h2>
+    <h2>A Very Quick Intro to Spark</h2>
   </hgroup>
   <article data-timings="">
     <p>Spark is a &quot;Big Data&quot; technology originally out of the 
@@ -620,7 +620,7 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
 
 <slide class="" id="slide-28" style="background:;">
   <hgroup>
-    <h2>An intro to Spark</h2>
+    <h2>A Very Quick Intro to Spark</h2>
   </hgroup>
   <article data-timings="">
     <p>Hadoop came out in ~2006 with MapReduce as a computational engine, which wasn&#39;t that useful for scientific computation.</p>
@@ -639,7 +639,7 @@ and processing packages that grew up around it.</p>
 
 <slide class="" id="slide-29" style="background:;">
   <hgroup>
-    <h2>An intro to Spark</h2>
+    <h2>A Very Quick Intro to Spark</h2>
   </hgroup>
   <article data-timings="">
     
@@ -664,7 +664,156 @@ and processing packages that grew up around it.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-30" style="background:;">
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>More than just analytics</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Don&#39;t need to justify Spark for those analyzing large emounts of data:</p>
+
+<ul>
+<li>Already widely successful for large-scale data processing</li>
+</ul>
+
+<p>Want to show how close it is to being ready to use for more traditional
+HPC applications, too, like simulation:</p>
+
+<ul>
+<li>Simulation is &quot;data intensive&quot;, too.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>Spark RDDs</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Spark RDDs prove to be a very powerful abstraction.</p>
+
+<p>Key-Value RDDs are a special case - a pair of values, first is key, second is value associated with.</p>
+
+<p>Can easily use join, etc to bring all values associated with a key together:</p>
+
+<ul>
+<li>Like all terms that are contribute to a particular point</li>
+</ul>
+
+<p>Linda tuple spaces, which underly Gaussian.</p>
+
+<p>Notebook: Spark 1 - diffusion</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/spark-rdds-diffusion.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>Spark execution graphs</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Operations on Spark RDDs can be:</p>
+
+<ul>
+<li>Transformations, like map, filter, join...</li>
+<li>Actions like collect, foreach, ..</li>
+</ul>
+
+<p>You boild a Spark computation by chaining together operations; but no data starts moving until part of the computation is materialized with an action.</p>
+
+<p>Allows optimizations over the entire computation graph.</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/spark-rdd.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>Spark execution graphs</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>So for instance here, nothing starts happening in earnest until the <code>plot_data()</code></p>
+
+<pre><code>    # Main loop: For each iteration,
+    #  - calculate terms in the next step
+    #  - and sum
+    for step in range(nsteps):
+        data = data.flatMap(stencil) \
+                    .reduceByKey(lambda x, y:x+y)
+
+    # Plot final results in black
+    plot_data(data, usecolor=&#39;black&#39;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>Spark Dataframes</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="assets/img/spark-dataframes.png" alt=""></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>But RDDs are also building blocks.</p>
+
+<p>Spark Data Frames are lists of columns, like pandas or R data frames.</p>
+
+<p>Can use SQL-like queries to perform calculations.  But this allows bringing the entire mature machinery of SQL query optimizers to bear, allowing further automated optimization of data movement, and computation.</p>
+
+<p>Notebook: Spark 2 - data frames</p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>Spark Graphs - GraphX</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Using RDDs, a graph library has also been implemented: GraphX.</p>
+
+<p>Many interesting features, but for us: <a href="http://blog.acolyer.org/2015/05/26/pregel-a-system-for-large-scale-graph-processing/">Pregel</a>-like algorithms on graphs.</p>
+
+<p>Nodes passes messages to their neighbours along edges.</p>
+
+<p>Like MPI (BSP) on unstructured graphs!</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/graphx.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-36" style="background:;">
   <hgroup>
     <h2>Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a></h2>
   </hgroup>
@@ -674,7 +823,7 @@ and processing packages that grew up around it.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
+<slide class="" id="slide-37" style="background:;">
   <hgroup>
     <h2>An intro to TensorFlow</h2>
   </hgroup>
@@ -684,7 +833,7 @@ and processing packages that grew up around it.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-32" style="background:;">
+<slide class="segue dark" id="slide-38" style="background:;">
   <hgroup>
     <h2>Conclusions</h2>
   </hgroup>
@@ -694,7 +843,7 @@ and processing packages that grew up around it.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-39" style="background:;">
   <article data-timings="">
     <p>foo bar baz</p>
 
@@ -864,44 +1013,80 @@ and processing packages that grew up around it.</p>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='An intro to Spark'>
+        data-slide=27 title='A Very Quick Intro to Spark'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='An intro to Spark'>
+        data-slide=28 title='A Very Quick Intro to Spark'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='An intro to Spark'>
+        data-slide=29 title='A Very Quick Intro to Spark'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
+        data-slide=30 title='More than just analytics'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='An intro to TensorFlow'>
+        data-slide=31 title='Spark RDDs'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='Conclusions'>
+        data-slide=32 title='Spark execution graphs'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='NA'>
+        data-slide=33 title='Spark execution graphs'>
          33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='Spark Dataframes'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='Spark Graphs - GraphX'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='An intro to TensorFlow'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='Conclusions'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='NA'>
+         39
       </a>
     </li>
   </ul>
