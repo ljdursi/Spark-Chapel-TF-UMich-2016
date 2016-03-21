@@ -504,7 +504,97 @@ A = B + C;
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-21" style="background:;">
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Playing with Chapel</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>There&#39;s a nascent Chapel REPL that you can use to familiarize yourself with the type system, etc, 
+but you can&#39;t do any real work with it yet; it&#39;s on the VM as <code>chpl-ipe</code>.</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/chpl-ipe.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Jacobi</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Running the Jacobi example shows a standard stencil-on-regular grid calculation:</p>
+
+<pre><code>$ cd ~/examples/chapel_examples
+$ chpl jacobi.chpl -o jacobi                   
+$ ./jacobi                                     
+Jacobi computation complete.
+Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
+# of iterations: 60
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Jacobi</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/chpl-jacobi.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>Tree Walks</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Lots of things do stencils on fixed rectangular grids well; maybe more impressively, Chapel&#39;s concurrency primitives allow things like distributed tree walks simply, too:</p>
+
+<p><img src="assets/img/chpl-tree.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Chapel: Caveats</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Compiler still quite slow</li>
+<li>Domain maps are static, making (say) AMR a ways away. 
+
+<ul>
+<li>(dynamic associative arrays would be a <em>huge</em> win in bioinformatics)</li>
+</ul></li>
+<li>Irregular domain maps are not as mature</li>
+</ul>
+
+<h2>Chapel: Pros</h2>
+
+<ul>
+<li>Growing community</li>
+<li>Developers very interested in &quot;onboarding&quot; new projects</li>
+<li>Open source, very portable</li>
+<li>Using mature approach (PGAS) in interesting ways</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-26" style="background:;">
   <hgroup>
     <h2>Spark: <a href="http://spark.apache.com">http://spark.apache.com</a></h2>
   </hgroup>
@@ -514,17 +604,21 @@ A = B + C;
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h2>An intro to Spark</h2>
   </hgroup>
   <article data-timings="">
-    
+    <p>Spark is a &quot;Big Data&quot; technology originally out of the 
+<a href="https://amplab.cs.berkeley.edu">AMPLab at UC Berkeley</a> that is rapidly becoming extremely popular</p>
+
+<p><img src="assets/img/spark-interest.png" alt=""></p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-23" style="background:;">
+<slide class="segue dark" id="slide-28" style="background:;">
   <hgroup>
     <h2>Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a></h2>
   </hgroup>
@@ -534,7 +628,7 @@ A = B + C;
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-29" style="background:;">
   <hgroup>
     <h2>An intro to TensorFlow</h2>
   </hgroup>
@@ -544,7 +638,7 @@ A = B + C;
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-25" style="background:;">
+<slide class="segue dark" id="slide-30" style="background:;">
   <hgroup>
     <h2>Conclusions</h2>
   </hgroup>
@@ -554,7 +648,7 @@ A = B + C;
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-26" style="background:;">
+<slide class="" id="slide-31" style="background:;">
   <article data-timings="">
     <p>foo bar baz</p>
 
@@ -688,38 +782,68 @@ A = B + C;
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Spark: <a href="http://spark.apache.com">http://spark.apache.com</a>'>
+        data-slide=21 title='Playing with Chapel'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='An intro to Spark'>
+        data-slide=22 title='Jacobi'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
+        data-slide=23 title='Jacobi'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='An intro to TensorFlow'>
+        data-slide=24 title='Tree Walks'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Conclusions'>
+        data-slide=25 title='Chapel: Caveats'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='NA'>
+        data-slide=26 title='Spark: <a href="http://spark.apache.com">http://spark.apache.com</a>'>
          26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='An intro to Spark'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='An intro to TensorFlow'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='Conclusions'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='NA'>
+         31
       </a>
     </li>
   </ul>

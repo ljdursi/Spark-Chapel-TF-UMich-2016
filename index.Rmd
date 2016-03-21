@@ -311,6 +311,63 @@ What distinguishes Chapel from HPL (say) is that it has these maps for other str
 
 http://chapel.cray.com/tutorials/SC09/Part4_CHAPEL.pdf
 
+--- &twocol
+
+## Playing with Chapel
+
+*** =left
+
+There's a nascent Chapel REPL that you can use to familiarize yourself with the type system, etc, 
+but you can't do any real work with it yet; it's on the VM as `chpl-ipe`.
+
+*** =right
+
+![](assets/img/chpl-ipe.png)
+
+--- 
+## Jacobi
+
+Running the Jacobi example shows a standard stencil-on-regular grid calculation:
+
+```
+$ cd ~/examples/chapel_examples
+$ chpl jacobi.chpl -o jacobi                   
+$ ./jacobi                                     
+Jacobi computation complete.
+Delta is 9.92124e-06 (< epsilon = 1e-05)
+# of iterations: 60
+```
+
+--- 
+
+## Jacobi
+
+![](assets/img/chpl-jacobi.png)
+
+--- 
+
+## Tree Walks
+
+Lots of things do stencils on fixed rectangular grids well; maybe more impressively, Chapel's concurrency primitives allow things like distributed tree walks simply, too:
+
+![](assets/img/chpl-tree.png)
+
+--- 
+
+## Chapel: Caveats
+
+* Compiler still quite slow
+* Domain maps are static, making (say) AMR a ways away. 
+    * (dynamic associative arrays would be a _huge_ win in bioinformatics)
+* Irregular domain maps are not as mature
+
+## Chapel: Pros
+
+* Growing community
+* Developers very interested in "onboarding" new projects
+* Open source, very portable
+* Using mature approach (PGAS) in interesting ways
+
 --- .segue .dark
 
 ## Spark: http://spark.apache.com
@@ -318,6 +375,11 @@ http://chapel.cray.com/tutorials/SC09/Part4_CHAPEL.pdf
 ---
 
 ## An intro to Spark
+
+Spark is a "Big Data" technology originally out of the 
+[AMPLab at UC Berkeley](https://amplab.cs.berkeley.edu) that is rapidly becoming extremely popular
+
+![](assets/img/spark-interest.png)
 
 --- .segue .dark
 
