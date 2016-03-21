@@ -610,7 +610,7 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
   </hgroup>
   <article data-timings="">
     <p>Spark is a &quot;Big Data&quot; technology originally out of the 
-<a href="https://amplab.cs.berkeley.edu">AMPLab at UC Berkeley</a> that is rapidly becoming extremely popular</p>
+<a href="https://amplab.cs.berkeley.edu">AMPLab at UC Berkeley</a> that is rapidly becoming extremely popular.</p>
 
 <p><img src="assets/img/spark-interest.png" alt=""></p>
 
@@ -618,7 +618,53 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-28" style="background:;">
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>An intro to Spark</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Hadoop came out in ~2006 with MapReduce as a computational engine, which wasn&#39;t that useful for scientific computation.</p>
+
+<ul>
+<li>One pass through data</li>
+<li>Going back to disk every iteration</li>
+</ul>
+
+<p>However, the ecosystem flourished, particularly around the Hadoop file system (HDFS) and new databases
+and processing packages that grew up around it.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>An intro to Spark</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Spark is in some ways &quot;post-Hadoop&quot;; it can happily interact with the Hadoop stack but doesn&#39;t require it.</p>
+
+<p>Built around concept of resilient distributed datasets</p>
+
+<ul>
+<li>Tables of rows, distributed across the job, normally in-memory</li>
+<li>Restricted to certain transformations - map, reduce, join, etc</li>
+<li>Lineage kept</li>
+<li>If a node fails, rows recalculated </li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/img/spark-rdd.png" alt=""></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue dark" id="slide-30" style="background:;">
   <hgroup>
     <h2>Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a></h2>
   </hgroup>
@@ -628,7 +674,7 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>An intro to TensorFlow</h2>
   </hgroup>
@@ -638,7 +684,7 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue dark" id="slide-30" style="background:;">
+<slide class="segue dark" id="slide-32" style="background:;">
   <hgroup>
     <h2>Conclusions</h2>
   </hgroup>
@@ -648,7 +694,7 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
+<slide class="" id="slide-33" style="background:;">
   <article data-timings="">
     <p>foo bar baz</p>
 
@@ -824,26 +870,38 @@ Delta is 9.92124e-06 (&lt; epsilon = 1e-05)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
+        data-slide=28 title='An intro to Spark'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='An intro to TensorFlow'>
+        data-slide=29 title='An intro to Spark'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='Conclusions'>
+        data-slide=30 title='Tensorflow: <a href="http://tensorflow.org">http://tensorflow.org</a>'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='NA'>
+        data-slide=31 title='An intro to TensorFlow'>
          31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='Conclusions'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='NA'>
+         33
       </a>
     </li>
   </ul>

@@ -377,9 +377,39 @@ Lots of things do stencils on fixed rectangular grids well; maybe more impressiv
 ## An intro to Spark
 
 Spark is a "Big Data" technology originally out of the 
-[AMPLab at UC Berkeley](https://amplab.cs.berkeley.edu) that is rapidly becoming extremely popular
+[AMPLab at UC Berkeley](https://amplab.cs.berkeley.edu) that is rapidly becoming extremely popular.
 
 ![](assets/img/spark-interest.png)
+
+---
+
+## An intro to Spark
+
+Hadoop came out in ~2006 with MapReduce as a computational engine, which wasn't that useful for scientific computation.
+
+* One pass through data
+* Going back to disk every iteration
+
+However, the ecosystem flourished, particularly around the Hadoop file system (HDFS) and new databases
+and processing packages that grew up around it.
+
+--- &twocol
+
+## An intro to Spark
+
+*** =left
+Spark is in some ways "post-Hadoop"; it can happily interact with the Hadoop stack but doesn't require it.
+
+Built around concept of resilient distributed datasets
+
+* Tables of rows, distributed across the job, normally in-memory
+* Restricted to certain transformations - map, reduce, join, etc
+* Lineage kept
+* If a node fails, rows recalculated 
+
+*** =right
+![](assets/img/spark-rdd.png)
+
 
 --- .segue .dark
 
