@@ -97,10 +97,12 @@ then
     # make sure all chapel python utils are executed with python2 rather than anaconda python3
     find ${CHAPEL_DIR} -type f  -exec grep "/usr/bin/env python" {} \; -exec sed -i -e 's/env python$/env python2/' {} \;
     rm ${CHAPEL_TAR_GZ}
+    export CHPL_COMM=gasnet
     cd ${BASEDIR}/${CHAPEL_DIR} && source util/quickstart/setchplenv.bash && make
     cd ${BASEDIR}
     chown -R ${USER}.${GROUP} ${CHAPEL_DIR} 
     echo "cd ${CHAPEL_DIR} && source util/quickstart/setchplenv.bash && cd" >> ${BASHRC} 
+    echo "export CHPL_COMM=gasnet" >> ${BASHRC}
 fi
 
 # Examples
