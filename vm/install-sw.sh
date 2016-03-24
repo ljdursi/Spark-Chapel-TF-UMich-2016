@@ -17,9 +17,9 @@ then
     sudo apt-get install -y bzip2
     wget -q --tries=1 --timeout=15 https://repo.continuum.io/miniconda/Miniconda3-3.19.0-Linux-x86_64.sh -O miniconda.sh 
     chmod u+x miniconda.sh && ./miniconda.sh -b -p /miniconda && rm miniconda.sh
-    chown -R ${USER}.${GROUP} /miniconda
+    chown -R "${USER}.${GROUP}" /miniconda
     /miniconda/bin/conda update -y conda
-    echo 'export PATH="/miniconda/bin:${PATH}"' >> ${BASHRC}
+    echo 'export PATH="/miniconda/bin:${PATH}"' >> "${BASHRC}"
 fi
 export PATH="/miniconda/bin:${PATH}"
 
@@ -41,37 +41,37 @@ then
   HADOOP_TAR_GZ=hadoop-$HADOOP_VERSION.tar.gz
   wget -q --tries=1 --timeout=15 http://${APACHE_MIRROR}/hadoop/common/hadoop-${HADOOP_VERSION}/$HADOOP_TAR_GZ
   tar xzf $HADOOP_TAR_GZ
-  chown -R ${USER}.${GROUP} hadoop-${HADOOP_VERSION}
-  rm $HADOOP_TAR_GZ
+  chown -R "${USER}.${GROUP}" "hadoop-${HADOOP_VERSION}"
+  rm "$HADOOP_TAR_GZ"
 fi
 
 # Spark
 echo "Spark install"
-cd ${BASEDIR}
+cd "${BASEDIR}"
 SPARK_VERSION=1.6.1
 SPARK_TAR_GZ=spark-${SPARK_VERSION}-bin-hadoop2.6.tgz
 SPARK_DIR=$( basename ${SPARK_TAR_GZ} .tgz )
-if [ ! -d ${SPARK_DIR} ]
+if [ ! -d "${SPARK_DIR}" ]
 then
   wget -q --tries=1 --timeout=15 http://${APACHE_MIRROR}/spark/spark-${SPARK_VERSION}/${SPARK_TAR_GZ} -O ${SPARK_TAR_GZ}
   tar xzf ${SPARK_TAR_GZ} 2> /dev/null
-  chown -R ${USER}.${GROUP} ${SPARK_DIR}
+  chown -R "${USER}.${GROUP}" "${SPARK_DIR}"
   rm ${SPARK_TAR_GZ}
-  echo "export SPARK_HOME=${BASEDIR}/${SPARK_DIR}" >> ${BASHRC} 
-  py4jzip=$( find ${BASEDIR}/${SPARK_DIR}/python -name "py4j*src.zip" )
-  echo "export PYTHONPATH=${PYTHONPATH}:${BASEDIR}/${SPARK_DIR}/python:${py4jzip}" >> ${BASHRC} 
+  echo "export SPARK_HOME=${BASEDIR}/${SPARK_DIR}" >> "${BASHRC}"
+  py4jzip=$( find "${BASEDIR}/${SPARK_DIR}/python" -name "py4j*src.zip" )
+  echo "export PYTHONPATH=${PYTHONPATH}:${BASEDIR}/${SPARK_DIR}/python:${py4jzip}" >> "${BASHRC}"
 fi
 export SPARK_HOME=${BASEDIR}/${SPARK_DIR}
 export PYTHONPATH=${PYTHONPATH}:${BASEDIR}/${SPARK_DIR}/python
-py4jzip=$( find ${BASEDIR}/${SPARK_DIR}/python -name "py4j*src.zip" )
+py4jzip=$( find "${BASEDIR}/${SPARK_DIR}/python" -name "py4j*src.zip" )
 export PYTHONPATH=${PYTHONPATH}:${BASEDIR}/${SPARK_DIR}/python:${py4jzip}
 
 /miniconda/bin/pip install findspark
 # install graphframes
-cd ${BASEDIR}
-$SPARK_HOME/bin/spark-shell --packages graphframes:graphframes:0.1.0-spark1.6 <<EOF
+cd "${BASEDIR}"
+"$SPARK_HOME/bin/spark-shell" --packages graphframes:graphframes:0.1.0-spark1.6 <<EOF
 EOF
-rm ${BASEDIR}/derby.log
+rm "${BASEDIR}/derby.log"
 
 # Tensorflow
 echo "Tensorflow install"
@@ -80,7 +80,7 @@ echo "Tensorflow install"
 # Shell in a box; gets g++, needed for Chapel
 echo "Shell in a box install"
 sudo apt-get install -y libssl-dev libpam0g-dev zlib1g-dev dh-autoreconf
-cd ${BASEDIR}
+cd "${BASEDIR}"
 git clone https://github.com/shellinabox/shellinabox.git && cd shellinabox && autoreconf -i && ./configure && make && make install && cd .. 
 
 # Chapel
@@ -88,21 +88,24 @@ echo "Chapel install"
 CHAPEL_VERSION=1.12.0
 CHAPEL_TAR_GZ=chapel-${CHAPEL_VERSION}.tar.gz
 CHAPEL_DIR=$( basename ${CHAPEL_TAR_GZ} .tar.gz )
-if [ ! -d $CHAPEL_DIR ]
+if [ ! -d "$CHAPEL_DIR" ]
 then
-    cd ${BASEDIR}
+    cd "${BASEDIR}"
     wget -q --tries=1 --timeout=15 https://github.com/chapel-lang/chapel/releases/download/${CHAPEL_VERSION}/${CHAPEL_TAR_GZ} -O ${CHAPEL_TAR_GZ}
     tar xzf ${CHAPEL_TAR_GZ} 2> /dev/null
-    chown -R ${USER}.${GROUP} ${CHAPEL_DIR} ${CHAPEL_TAR_GZ}
+    chown -R "${USER}.${GROUP}" "${CHAPEL_DIR}" "${CHAPEL_TAR_GZ}"
     # make sure all chapel python utils are executed with python2 rather than anaconda python3
-    find ${CHAPEL_DIR} -type f  -exec grep "/usr/bin/env python" {} \; -exec sed -i -e 's/env python$/env python2/' {} \;
+    find "${CHAPEL_DIR}" -type f  -exec grep "/usr/bin/env python" {} \; -exec sed -i -e 's/env python$/env python2/' {} \;
     rm ${CHAPEL_TAR_GZ}
+    cd "${BASEDIR}/${CHAPEL_DIR}" && source util/quickstart/setchplenv.bash && make
     export CHPL_COMM=gasnet
-    cd ${BASEDIR}/${CHAPEL_DIR} && source util/quickstart/setchplenv.bash && make
-    cd ${BASEDIR}
-    chown -R ${USER}.${GROUP} ${CHAPEL_DIR} 
-    echo "cd ${CHAPEL_DIR} && source util/quickstart/setchplenv.bash && cd" >> ${BASHRC} 
-    echo "export CHPL_COMM=gasnet" >> ${BASHRC}
+    export GASNET_SPAWNFN=L
+    cd "${BASEDIR}/${CHAPEL_DIR}" && source util/quickstart/setchplenv.bash && make
+    cd "${BASEDIR}"
+    chown -R "${USER}.${GROUP}" "${CHAPEL_DIR}"
+    echo "cd ${CHAPEL_DIR} && source util/quickstart/setchplenv.bash && cd ${BASEDIR}" >> "${BASHRC}"
+    echo "export CHPL_COMM=gasnet" >> "${BASHRC}"
+    echo "export GASNET_SPAWNFN=L" >> "${BASHRC}"
 fi
 
 # Examples
