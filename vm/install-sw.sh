@@ -98,9 +98,10 @@ then
     find "${CHAPEL_DIR}" -type f  -exec grep "/usr/bin/env python" {} \; -exec sed -i -e 's/env python$/env python2/' {} \;
     rm ${CHAPEL_TAR_GZ}
     cd "${BASEDIR}/${CHAPEL_DIR}" && source util/quickstart/setchplenv.bash && make
+    cd "${BASEDIR}/${CHAPEL_DIR}/third-party/gasnet" && make
     export CHPL_COMM=gasnet
     export GASNET_SPAWNFN=L
-    cd "${BASEDIR}/${CHAPEL_DIR}" && source util/quickstart/setchplenv.bash && make
+    cd "${BASEDIR}/${CHAPEL_DIR}" && make
     cd "${BASEDIR}"
     chown -R "${USER}.${GROUP}" "${CHAPEL_DIR}"
     echo "cd ${CHAPEL_DIR} && source util/quickstart/setchplenv.bash && cd ${BASEDIR}" >> "${BASHRC}"
