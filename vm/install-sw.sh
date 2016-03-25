@@ -117,6 +117,10 @@ do
    cp -r Spark-Chapel-TF-UMich-2016/${dir} ${BASEDIR}
    chown -R ${USER}.${GROUP} ${BASEDIR}/${dir}
 done
+sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/shellinabox /etc/init.d
+sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/jupyter /etc/init.d
+sudo update-rc.d shellinabox  defaults
+sudo update-rc.d jupyter  defaults
 rm -rf Spark-Chapel-TF-UMich-2016
 cp -r ${BASEDIR}/examples /vagrant/examples
 chown -R ${USER}.${GROUP} /vagrant/examples
@@ -132,8 +136,5 @@ rm -rf hadoop-config
 #   - Jupyter notebook
 #
 
-sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/shellinabox /etc/init.d
-sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/jupyter /etc/init.d
-sudo update-rc.d minidlna defaults
 sudo /etc/init.d/shellinabox start
 sudo /etc/init.d/jupyter start
