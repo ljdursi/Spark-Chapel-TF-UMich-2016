@@ -132,8 +132,8 @@ rm -rf hadoop-config
 #   - Jupyter notebook
 #
 
-sudo cp ~/Spark-Chapel-TF-UMich-2016/vm/shellinabox /etc/init.d
-sudo cp ~/Spark-Chapel-TF-UMich-2016/vm/jupyter /etc/init.d
+sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/shellinabox /etc/init.d
+sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/jupyter /etc/init.d
 sudo update-rc.d minidlna defaults
 sudo /etc/init.d/shellinabox start
 sudo /etc/init.d/jupyter start
