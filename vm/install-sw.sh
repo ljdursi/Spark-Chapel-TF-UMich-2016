@@ -119,6 +119,7 @@ do
 done
 sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/shellinabox /etc/init.d
 sudo cp ${BASEDIR}/Spark-Chapel-TF-UMich-2016/vm/jupyter /etc/init.d
+chmod 755 /etc/init.d/{jupyter,shellinabox}
 sudo update-rc.d shellinabox  defaults
 sudo update-rc.d jupyter  defaults
 rm -rf Spark-Chapel-TF-UMich-2016
