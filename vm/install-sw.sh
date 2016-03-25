@@ -132,6 +132,8 @@ rm -rf hadoop-config
 #   - Jupyter notebook
 #
 
-sed -i'' 's|export JAVA_HOME=${JAVA_HOME}|export JAVA_HOME=/usr/lib/jvm/default-java|' ${BASEDIR}/hadoop-${HADOOP_VERSION}/etc/hadoop/hadoop-env.sh
-sudo shellinaboxd -b -p 9998 -t 
-jupyter notebook --port 9999 --no-browser --notebook-dir=/vagrant/examples --ip=192.168.33.10
+sudo cp ~/Spark-Chapel-TF-UMich-2016/vm/shellinabox /etc/init.d
+sudo cp ~/Spark-Chapel-TF-UMich-2016/vm/jupyter /etc/init.d
+sudo update-rc.d minidlna defaults
+sudo /etc/init.d/shellinabox start
+sudo /etc/init.d/jupyter start
